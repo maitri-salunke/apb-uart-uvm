@@ -1,0 +1,5 @@
+`verilator_config
+// code coverage is measured on the DUT only
+coverage_off -file "*third_party*"
+coverage_off -file "tb/*"
+lint_off -file "*third_party*"

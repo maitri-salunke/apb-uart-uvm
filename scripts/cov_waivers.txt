@@ -1,0 +1,7 @@
+# Code-coverage waivers. Format: <python regex on "file:line kind/bin hier">  # reason
+# Each waiver is reported separately; raw numbers are always printed too.
+rtl/apb_uart\.sv:\d+ (rmux|prdata)\[(2[1-9]|3[01])\]  # reserved read bits 31:21 are constant 0 by design (checked by SB ST_RSVD)
+rtl/apb_uart\.sv:\d+ reg_addr\[[01]\]  # reg_addr[1:0] is tied to 2'b00 (word decode); PADDR[1:0] itself is toggled
+rtl/\w+\.sv:\d+ (presetn|rst_n):1->0  # reset is asserted once at time 0 only; mid-traffic reset is out of scope (VPLAN)
+rtl/uart_baud_gen\.sv:\d+ cnt\[1[2-5]\]  # needs DIV >= 4096 (one frame > 650k cycles); divisor register bits are bit-bashed
+rtl/uart_rx\.sv:106 case|rtl/uart_tx\.sv:98 case  # unreachable 'default' arm of the FSM case (all 5 states are enumerated)

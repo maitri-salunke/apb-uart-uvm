@@ -1,0 +1,9 @@
+.venv/
+build/
+logs/
+obj_dir/
+third_party/uvm-verilator/
+*.dat
+*.vcd
+*.fst
+__pycache__/
